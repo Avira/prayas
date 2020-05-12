@@ -1,0 +1,9 @@
+name: prayas
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
+dependencies:
+  - python>=3.7
+  - pandas
+  - seaborn
