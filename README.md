@@ -16,7 +16,7 @@ wget https://raw.githubusercontent.com/Avira/prayas/master/requirements-minimal.
 pip install -r requirements-minimal.txt
 pip install git+https://github.com/Avira/prayas.git
 ```
-You can excute these commands either in a `virtualenv` or a 
+You can execute these commands either in a `virtualenv` or a 
 `conda` environment.
 
 
@@ -67,8 +67,22 @@ make virtualenv minimal=2
 To work with the example notebooks, change into the notebooks directory
 and start Jupyter Lab:
 ```
-cd docs/notebooks
+cd docs-src/notebooks
 jupyter lab
+```
+
+## Development
+
+If you want to extend *prayas*, please create a pull request. The simplest
+way is to follow the installation procedure above but install it in
+development mode:
+```
+python setup.py develop
+``` 
+
+The documentation can be generated with:
+```
+make docs
 ```
 
 ## Feedback
