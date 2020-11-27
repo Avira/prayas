@@ -1,4 +1,4 @@
-.PHONY: conda virtualenv
+.PHONY: conda virtualenv docs
 
 SHELL = /bin/bash
 
@@ -9,7 +9,7 @@ else
 	conda env create -f environment.yml
 	jupyter labextension install @pyviz/jupyterlab_pyviz
 endif
-	conda activate khoj
+	conda activate prayas
 	python setup.py install
 
 virtualenv:
@@ -22,3 +22,7 @@ else
 	jupyter labextension install @pyviz/jupyterlab_pyviz
 endif
 	python setup.py install
+
+docs:
+	sphinx-build -b html docs-src docs
+	touch docs/.nojekyll
