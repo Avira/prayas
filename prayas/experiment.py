@@ -62,7 +62,7 @@ class Experiment:
     def monitor_loss(self):
         loss = pd.DataFrame()
         for n in self.setup.measures:
-            l = pd.DataFrame([dict(self.models[m].loss_overall(measure=n)) for m in self.models])
+            l = pd.DataFrame([dict(self.models[m].loss_overall(measure=n)) for m in self.models]) * 100
             l["Measure"] = n
             l["Timestamp"] = self.models.keys()
             loss = loss.append(l)

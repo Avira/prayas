@@ -33,7 +33,7 @@ class ConversionModel(ABC):
         self._model_type = None
         self._baseline = None
         self._primary = "conversion"
-        self._loss_threshold = 0.05
+        self._loss_threshold = 5
 
     def __str__(self):
         s = f"""\
