@@ -1,0 +1,10 @@
+.pytest_cache
+build
+dist
+env
+*.egg-info
+.DS_Store
+.idea
+*.pyc
+.eggs
+.ipynb_checkpoints
