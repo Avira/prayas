@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Module model_aggregate &#8212; prayas 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module experiment" href="experiment.html" />
+    <link rel="prev" title="Module model_multioptions" href="model_multioptions.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <span class="target" id="module-prayas.model_aggregate"></span><div class="section" id="module-model-aggregate">
+<h1>Module model_aggregate<a class="headerlink" href="#module-model-aggregate" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="prayas.model_aggregate.AggregateModel">
+<em class="property">class </em><code class="sig-prename descclassname">prayas.model_aggregate.</code><code class="sig-name descname">AggregateModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">variants</span></em>, <em class="sig-param"><span class="n">baseline</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prior_alpha</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">prior_beta</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#prayas.model_aggregate.AggregateModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for aggregated models</p>
+<p>This model is applicable for scenarios where a only the aggregated
+measures other than conversion (e.g., revenue) are observed. The
+prior distribution of the measure follows an Exponential(l)
+distribution with the assumpition that the parameter l
+follows a Gamma(a, b) distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variants</strong> – Integer defining the number of variants
+or a list variant names</p></li>
+<li><p><strong>baseline</strong> – Baseline variant</p></li>
+<li><p><strong>prior_alpha</strong> – Hyperparameter a of the prior distribution</p></li>
+<li><p><strong>prior_beta</strong> – Hyperparameter b of the prior distribution</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>“Bayesian A/B Testing for Business Decisions” by Shafi Kamalbasha
+and Manuel J. A. Eugster, 2020. <a class="reference external" href="https://arxiv.org/abs/2003.02769">https://arxiv.org/abs/2003.02769</a></p>
+<dl class="py method">
+<dt id="prayas.model_aggregate.AggregateModel.add_measure">
+<code class="sig-name descname">add_measure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">success_value</span></em>, <em class="sig-param"><span class="n">nonsuccess_value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#prayas.model_aggregate.AggregateModel.add_measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add an additional measure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the measure, e.g., revenue</p></li>
+<li><p><strong>success_value</strong> – Value in case of success for each variant and option</p></li>
+<li><p><strong>nonsuccess_value</strong> – Value in case of nonsuccess for each variant and option</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None, used for its side-effect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="prayas.model_aggregate.AggregateModel.set_result">
+<code class="sig-name descname">set_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">successes</span></em>, <em class="sig-param"><span class="n">trials</span></em><span class="sig-paren">)</span><a class="headerlink" href="#prayas.model_aggregate.AggregateModel.set_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the result of the experiment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>successes</strong> – Successes per variant and option</p></li>
+<li><p><strong>trials</strong> – Trials per variant and option</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None, used for its side-effect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="prayas.model_aggregate.AggregateModel.new">
+<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">successes</span></em>, <em class="sig-param"><span class="n">trials</span></em><span class="sig-paren">)</span><a class="headerlink" href="#prayas.model_aggregate.AggregateModel.new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new ConversionModel object, used for experiments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>successes</strong> – Successes per variant and option</p></li>
+<li><p><strong>trials</strong> – Trials per variant and option</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ConversionModel object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="prayas.model_aggregate.AggregateModel.sample">
+<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">measure</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">20000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#prayas.model_aggregate.AggregateModel.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample from the posterior distribution of each variant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>measure</strong> – Name of the measure; default is <cite>conversion</cite></p></li>
+<li><p><strong>n</strong> – Number of samples to draw</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Array with samples for each variant</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="prayas.model_aggregate.AggregateModel.measure">
+<code class="sig-name descname">measure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">measure</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#prayas.model_aggregate.AggregateModel.measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value of a specific measure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>measure</strong> – Name of the measure; default is <cite>conversion</cite></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data frame with measure per variant</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="prayas.model_aggregate.AggregateModel.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">measure</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">20000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#prayas.model_aggregate.AggregateModel.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the posterior distribution of each variant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> – Number of samples to draw</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Matplotlib pyplot object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<!--<h1 class="logo"><a href="../index.html">prayas</a></h1>-->
+<h1 class="logo">prayas</h1>
+
+
+
+
+
+
+
+
+<!--<h3>Navigation</h3>-->
+<ul>
+    <li class="toctree-l1"><a href="../index.html">Welcome</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="model_conversion.html">Module model_conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_oneoption.html">Module model_oneoption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_multioptions.html">Module model_multioptions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Module model_aggregate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiment.html">Module experiment</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Modules</a><ul>
+      <li>Previous: <a href="model_multioptions.html" title="previous chapter">Module model_multioptions</a></li>
+      <li>Next: <a href="experiment.html" title="next chapter">Module experiment</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019-2020 Avira Operations GmbH & Co. KG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/model_aggregate.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

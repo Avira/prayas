@@ -8,3 +8,5 @@ env
 *.pyc
 .eggs
 .ipynb_checkpoints
+docs/.buildinfo
+docs/.doctrees

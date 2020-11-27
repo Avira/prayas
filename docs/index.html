@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to prayas! &#8212; prayas 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started" href="intro.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-prayas">
+<h1>Welcome to prayas!<a class="headerlink" href="#welcome-to-prayas" title="Permalink to this headline">¶</a></h1>
+<p><em>Prayas</em> is a Bayesian A/B Testing framework written in Python and
+used within <a class="reference external" href="http://avira.com">Avira</a> to make business decisions
+in many different areas.</p>
+<a class="reference internal image-reference" href="_images/fig-abtest.png"><img alt="_images/fig-abtest.png" class="align-center" src="_images/fig-abtest.png" style="width: 65%;" /></a>
+<p>Controlled experiments (A/B tests or randomized field experiments) are
+the de facto standard to make data-driven decisions when implementing
+changes and observing customer responses. Bayesian inference allows us
+to express the results in easy to understand measures like <em>probability
+to be the best variant</em> and <em>expected uplift in conversion rates</em>.</p>
+<p>The <em>prayas</em> package currently implements three experiment scenarios that are
+common in our company:</p>
+<ol class="arabic simple">
+<li><p>One option model – A variant contains only one option to select</p></li>
+<li><p>Multi-options model – A variant can contain more than one option to select</p></li>
+<li><p>Aggregated model – Per variant only aggregated measures are observed</p></li>
+</ol>
+<p>See <a class="reference internal" href="examples.html#ref-examples"><span class="std std-ref">Examples</span></a> for an illustration of each model.
+The underlying methodology is described in
+<a class="reference external" href="https://arxiv.org/abs/2003.02769">Bayesian A/B Testing for Business Decisions</a>
+by Shafi Kamalbasha and Manuel J. A. Eugster (2020).</p>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/01-one-option-model.html">One option model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/02-multi-options-model.html">Multi-options model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/03-aggregated-model.html">Aggregated model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04-one-vs-multi.html">One option vs. multi-options model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/05-experiments.html">Experiments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/index.html">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_conversion.html">Module model_conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_oneoption.html">Module model_oneoption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_multioptions.html">Module model_multioptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_aggregate.html">Module model_aggregate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/experiment.html">Module experiment</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="version">
+<h2>Version<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h2>
+<p>Documentation based on <cite>prayas</cite> version 0.1; generated on
+Nov 27, 2020.</p>
+</div>
+<div class="section" id="feedback">
+<h2>Feedback<a class="headerlink" href="#feedback" title="Permalink to this headline">¶</a></h2>
+<p>In case of any bug, comments, feature requests, etc. please open an issue on
+the <a class="reference external" href="https://github.com/Avira/prayas">project Github page</a>.</p>
+</div>
+<div class="section" id="contributors">
+<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Shafi Kamalbasha</p></li>
+<li><p>Alin Secareanu</p></li>
+<li><p>Manuel Eugster</p></li>
+</ul>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://choosealicense.com/licenses/mit/">MIT</a> License.
+Copyright (c) 2019-2020 Avira Operations GmbH &amp; Co. KG</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<!--<h1 class="logo"><a href="#">prayas</a></h1>-->
+<h1 class="logo">prayas</h1>
+
+
+
+
+
+
+
+
+<!--<h3>Navigation</h3>-->
+<ul>
+    <li class="toctree-l1"><a href="#">Welcome</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/index.html">Modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="intro.html" title="next chapter">Getting started</a></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019-2020 Avira Operations GmbH & Co. KG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

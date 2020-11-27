@@ -1,0 +1,705 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>One option model &#8212; prayas 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Multi-options model" href="02-multi-options-model.html" />
+    <link rel="prev" title="Examples" href="../examples.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    min-width: 5.5ex;
+    padding-top: 0.3rem;
+    padding-right: 0.3rem;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 0.3rem;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="One-option-model">
+<h1>One option model<a class="headerlink" href="#One-option-model" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">prayas</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<p>The experiment consists of multiple variants and in each variant the visitor has only one option to choose. A detailed explanation of the methodology is available in <a class="reference external" href="https://arxiv.org/abs/2003.02769">Bayesian A/B Testing for Business Decisions</a> by Shafi Kamalbasha and Manuel J. A. Eugster (2020).</p>
+<p>Setup the model and define the four variants:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span> <span class="o">=</span> <span class="n">OneOptionModel</span><span class="p">([</span><span class="s2">&quot;Discount 20&quot;</span><span class="p">,</span> <span class="s2">&quot;Discount 10&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Discount 40&quot;</span><span class="p">,</span> <span class="s2">&quot;Discount 50&quot;</span><span class="p">],</span>
+                   <span class="n">baseline</span> <span class="o">=</span> <span class="s2">&quot;Discount 20&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The full model specification is:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+One option model
+Variants              : Discount 20, Discount 10, Discount 40, Discount 50
+Baseline              : Discount 20
+Measures              : conversion
+Primary measure       : conversion
+Maximum loss threshold: 5
+</pre></div></div>
+</div>
+<p>Set the result of the experiment:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">successes</span><span class="o">=</span><span class="p">[</span><span class="mi">139</span><span class="p">,</span> <span class="mi">147</span><span class="p">,</span> <span class="mi">149</span><span class="p">,</span> <span class="mi">134</span><span class="p">],</span>
+             <span class="n">trials</span><span class="o">=</span><span class="p">[</span><span class="mi">15144</span><span class="p">,</span> <span class="mi">15176</span><span class="p">,</span> <span class="mi">14553</span><span class="p">,</span> <span class="mi">14948</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Investigate the result:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01-one-option-model_10_0.png" src="../_images/notebooks_01-one-option-model_10_0.png" />
+</div>
+</div>
+<p>The plot shows the posteriors for the conversion rate based on the underlying one option model. The decision for this experiment is:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span><span class="o">.</span><span class="n">decision</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variant</th>
+      <th>Measure</th>
+      <th>ProbabilityToBeBest</th>
+      <th>ProbabilityToBeatBaseline</th>
+      <th>UpliftFromBaseline</th>
+      <th>PotentialLossFromBaseline</th>
+      <th>MaxUplift</th>
+      <th>MaxPotentialLoss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Discount 40</td>
+      <td>conversion</td>
+      <td>0.5833</td>
+      <td>0.8277</td>
+      <td>11.380219</td>
+      <td>1.178262</td>
+      <td>14.194803</td>
+      <td>2.375415</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>In this experiment, the variant ‘Discount 40’ has the hightest probability to be the best with 58%. It is 82% better than the baseline with an uplift of 11%. If we go with ‘Discount 40’, there is still a change that is not better the baseline and the potential loss is about 1%.</p>
+<p>The decision is based on the defined <em>primary</em> measure and <em>maximum acceptable loss</em>. The default values are <code class="docutils literal notranslate"><span class="pre">conversion</span></code> as the primary measure and <code class="docutils literal notranslate"><span class="pre">5%</span></code> as the maximum acceptable loss. To change the default values, change the parameters of the model in the setup step:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">m.primary_measure</span> <span class="pre">=</span> <span class="pre">&quot;...&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">m.loss_threshold</span> <span class="pre">=</span> <span class="pre">&quot;...&quot;</span></code></p></li>
+</ul>
+<p>These two parameters are not part of the decision function but part of the model. This should highlight the fact that the parameters should be defined during the experiment design and setup stage and are not parameters to play around in the analysis stage.</p>
+<p>Get more details into the experiment and the decision:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span><span class="o">.</span><span class="n">score_baseline</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variant</th>
+      <th>Measure</th>
+      <th>ProbabilityToBeBest</th>
+      <th>ProbabilityToBeatBaseline</th>
+      <th>UpliftFromBaseline</th>
+      <th>PotentialLossFromBaseline</th>
+      <th>MaxUplift</th>
+      <th>MaxPotentialLoss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Discount 40</td>
+      <td>conversion</td>
+      <td>0.58700</td>
+      <td>0.82475</td>
+      <td>11.605663</td>
+      <td>1.160935</td>
+      <td>14.214564</td>
+      <td>2.482101</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Discount 10</td>
+      <td>conversion</td>
+      <td>0.25255</td>
+      <td>0.67210</td>
+      <td>5.451555</td>
+      <td>2.617965</td>
+      <td>8.013833</td>
+      <td>7.605213</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Discount 20</td>
+      <td>conversion</td>
+      <td>0.09685</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>2.428856</td>
+      <td>11.302390</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Discount 50</td>
+      <td>conversion</td>
+      <td>0.06360</td>
+      <td>0.41985</td>
+      <td>-2.313666</td>
+      <td>6.024267</td>
+      <td>-2.371262</td>
+      <td>13.028885</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The data frame consists of a row for each variant and measure combination. It provides:</p>
+<ol class="arabic simple">
+<li><p>The probability to be the best variant and the probability to beat the baseline</p></li>
+<li><p>The estimated uplift and potential loss in percentage from the baseline if this variant is put into production</p></li>
+<li><p>The estimated uplift and potential loss in percentage from the best variant if this variant is put into production</p></li>
+</ol>
+<p>The package also provides a function to compute a pairwise scoring between all pairs of variants (and measures):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span><span class="o">.</span><span class="n">score_pairwise</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Left</th>
+      <th>Right</th>
+      <th>Measure</th>
+      <th>LeftMeasure</th>
+      <th>RightMeasure</th>
+      <th>Uplift</th>
+      <th>ProbabilityUplift</th>
+      <th>ProbabilityLoss</th>
+      <th>Loss</th>
+      <th>LeftMeasureMaxLoss</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Discount 40</td>
+      <td>Discount 50</td>
+      <td>conversion</td>
+      <td>0.010238</td>
+      <td>0.008964</td>
+      <td>14.139242</td>
+      <td>0.86840</td>
+      <td>0.13160</td>
+      <td>0.866717</td>
+      <td>0.010150</td>
+      <td>1227.851782</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Discount 40</td>
+      <td>Discount 20</td>
+      <td>conversion</td>
+      <td>0.010238</td>
+      <td>0.009179</td>
+      <td>11.427508</td>
+      <td>0.82395</td>
+      <td>0.17605</td>
+      <td>1.189304</td>
+      <td>0.010117</td>
+      <td>941.569550</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Discount 10</td>
+      <td>Discount 50</td>
+      <td>conversion</td>
+      <td>0.009686</td>
+      <td>0.008964</td>
+      <td>8.054927</td>
+      <td>0.74810</td>
+      <td>0.25190</td>
+      <td>1.915019</td>
+      <td>0.009501</td>
+      <td>602.589061</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Discount 40</td>
+      <td>Discount 10</td>
+      <td>conversion</td>
+      <td>0.010238</td>
+      <td>0.009686</td>
+      <td>5.630762</td>
+      <td>0.67905</td>
+      <td>0.32095</td>
+      <td>2.456991</td>
+      <td>0.009987</td>
+      <td>382.356875</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Discount 10</td>
+      <td>Discount 20</td>
+      <td>conversion</td>
+      <td>0.009686</td>
+      <td>0.009179</td>
+      <td>5.487745</td>
+      <td>0.67950</td>
+      <td>0.32050</td>
+      <td>2.564085</td>
+      <td>0.009438</td>
+      <td>372.892259</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Discount 20</td>
+      <td>Discount 50</td>
+      <td>conversion</td>
+      <td>0.009179</td>
+      <td>0.008964</td>
+      <td>2.433630</td>
+      <td>0.58195</td>
+      <td>0.41805</td>
+      <td>3.752384</td>
+      <td>0.008834</td>
+      <td>141.625121</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The data frame returns a row for each pair of variants and measure combination. It provides the information on:</p>
+<ol class="arabic simple">
+<li><p>On average we can expect <code class="docutils literal notranslate"><span class="pre">LeftMeasure</span></code> and <code class="docutils literal notranslate"><span class="pre">RightMeasure</span></code> per trial (depending on the measure this is average conversion, average revenue, average gain, etc.)</p></li>
+<li><p>The probability <code class="docutils literal notranslate"><span class="pre">ProbabilityUplift</span></code> that the left variant is better than the right variant with an uplift of <code class="docutils literal notranslate"><span class="pre">Uplift</span></code>%</p></li>
+<li><p>The risk of going with the left variant is a maximum drop of <code class="docutils literal notranslate"><span class="pre">Loss</span></code>% with a probability of <code class="docutils literal notranslate"><span class="pre">ProbabilityLoss</span></code>, resulting in an average of <code class="docutils literal notranslate"><span class="pre">LeftMeasureMaxLoss</span></code> per trial.</p></li>
+<li><p>A score based on <code class="docutils literal notranslate"><span class="pre">Uplift</span> <span class="pre">*</span> <span class="pre">ProbabilityUplift</span></code></p></li>
+</ol>
+<p>For example, the first row tells us that for ‘Discount 40’ we can expect a 1% and for ‘Discount 50’ a 0.9% conversion rate per visitor. There is 87% probability that ‘Discount 40’ is 14.2% better than ‘Discount 50’. The risk of going with ‘Discount 40’ is a maximum drop of 83.4% with a probability of 12.9%, resulting in an averge loss of 0.01 conversions per trial.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<!--<h1 class="logo"><a href="../index.html">prayas</a></h1>-->
+<h1 class="logo">prayas</h1>
+
+
+
+
+
+
+
+
+<!--<h3>Navigation</h3>-->
+<ul>
+    <li class="toctree-l1"><a href="../index.html">Welcome</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">One option model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-multi-options-model.html">Multi-options model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-aggregated-model.html">Aggregated model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-one-vs-multi.html">One option vs. multi-options model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-experiments.html">Experiments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../examples.html">Examples</a><ul>
+      <li>Previous: <a href="../examples.html" title="previous chapter">Examples</a></li>
+      <li>Next: <a href="02-multi-options-model.html" title="next chapter">Multi-options model</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019-2020 Avira Operations GmbH & Co. KG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/notebooks/01-one-option-model.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

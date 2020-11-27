@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Aggregated model &#8212; prayas 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="One option vs. multi-options model" href="04-one-vs-multi.html" />
+    <link rel="prev" title="Multi-options model" href="02-multi-options-model.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    min-width: 5.5ex;
+    padding-top: 0.3rem;
+    padding-right: 0.3rem;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 0.3rem;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Aggregated-model">
+<h1>Aggregated model<a class="headerlink" href="#Aggregated-model" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">prayas</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<p>The experiment consists of multiple variants and in each variant the visitor has one ore more options to choose, but we only observe the overall success. A detailed explanation of the methodology is available in <a class="reference external" href="https://arxiv.org/abs/2003.02769">Bayesian A/B Testing for Business Decisions</a> by Shafi Kamalbasha and Manuel J. A. Eugster (2020).</p>
+<p>This data is the same as for the multi-option model – the experiment consists of two variants with each variant having <code class="docutils literal notranslate"><span class="pre">9</span></code> different options from which the visitor can choose. However, we are going to simulate that we are only observing the aggregated measures. The model is setup as:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span> <span class="o">=</span> <span class="n">AggregateModel</span><span class="p">(</span><span class="n">variants</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Original&quot;</span><span class="p">,</span> <span class="s2">&quot;Progressive&quot;</span><span class="p">],</span>
+                   <span class="n">baseline</span><span class="o">=</span><span class="s2">&quot;Original&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>To simulate the aggregated observations, we sum up the measures also used in the multi-option model example:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Revenue of the 9 options per variant:</span>
+<span class="n">rev_a</span> <span class="o">=</span> <span class="p">[</span><span class="mf">27.95</span><span class="p">,</span>  <span class="mf">47.95</span><span class="p">,</span>  <span class="mf">63.95</span><span class="p">,</span>
+         <span class="mf">35.95</span><span class="p">,</span>  <span class="mf">63.95</span><span class="p">,</span>  <span class="mf">79.95</span><span class="p">,</span>
+         <span class="mf">79.95</span><span class="p">,</span> <span class="mf">151.95</span><span class="p">,</span> <span class="mf">223.95</span><span class="p">]</span>
+<span class="n">rev_b</span> <span class="o">=</span> <span class="p">[</span><span class="mf">34.95</span><span class="p">,</span>  <span class="mf">59.95</span><span class="p">,</span>  <span class="mf">79.95</span><span class="p">,</span>
+         <span class="mf">37.95</span><span class="p">,</span>  <span class="mf">67.95</span><span class="p">,</span>  <span class="mf">84.95</span><span class="p">,</span>
+         <span class="mf">69.95</span><span class="p">,</span> <span class="mf">132.95</span><span class="p">,</span> <span class="mf">195.95</span><span class="p">]</span>
+
+<span class="c1"># Conversions of the 9 options per variant:</span>
+<span class="n">conv_a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">conv_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="c1"># Aggregates:</span>
+<span class="n">totals_rev_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rev_a</span><span class="p">,</span> <span class="n">conv_a</span><span class="p">)])</span>
+<span class="n">totals_rev_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rev_b</span><span class="p">,</span> <span class="n">conv_b</span><span class="p">)])</span>
+
+<span class="n">totals_conv_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">conv_a</span><span class="p">)</span>
+<span class="n">totals_conv_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">conv_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Compared to the <code class="docutils literal notranslate"><span class="pre">one</span> <span class="pre">option</span> <span class="pre">model</span></code> and the <code class="docutils literal notranslate"><span class="pre">multi-option</span> <span class="pre">model</span></code>, the measures are also an outcome of the experiment and set together with the result:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span><span class="o">.</span><span class="n">add_measure</span><span class="p">(</span><span class="s2">&quot;revenue&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">totals_rev_a</span><span class="p">,</span> <span class="n">totals_rev_b</span><span class="p">])</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_measure</span><span class="p">(</span><span class="s2">&quot;gain&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">totals_rev_a</span><span class="p">,</span> <span class="n">totals_rev_b</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.06</span><span class="o">*</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="o">*</span><span class="mi">9</span><span class="p">])</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">set_result</span><span class="p">([</span><span class="n">totals_conv_a</span><span class="p">,</span> <span class="n">totals_conv_b</span><span class="p">],</span> <span class="p">[</span><span class="mi">8067</span><span class="p">,</span> <span class="mi">8082</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Investigate the result:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_03-aggregated-model_10_0.png" src="../_images/notebooks_03-aggregated-model_10_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_03-aggregated-model_10_1.png" src="../_images/notebooks_03-aggregated-model_10_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_03-aggregated-model_10_2.png" src="../_images/notebooks_03-aggregated-model_10_2.png" />
+</div>
+</div>
+<p>Get details on the result:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">m</span><span class="o">.</span><span class="n">score_baseline</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variant</th>
+      <th>Measure</th>
+      <th>ProbabilityToBeBest</th>
+      <th>ProbabilityToBeatBaseline</th>
+      <th>UpliftFromBaseline</th>
+      <th>PotentialLossFromBaseline</th>
+      <th>MaxUplift</th>
+      <th>MaxPotentialLoss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Progressive</td>
+      <td>gain</td>
+      <td>0.87150</td>
+      <td>0.86545</td>
+      <td>51.823793</td>
+      <td>3.276094</td>
+      <td>52.106298</td>
+      <td>3.219060</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Original</td>
+      <td>conversion</td>
+      <td>0.79955</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>11.428042</td>
+      <td>1.462822</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Original</td>
+      <td>revenue</td>
+      <td>0.51010</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.504426</td>
+      <td>7.058403</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Progressive</td>
+      <td>revenue</td>
+      <td>0.48990</td>
+      <td>0.49145</td>
+      <td>-0.554503</td>
+      <td>7.391586</td>
+      <td>-0.501895</td>
+      <td>7.456368</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Progressive</td>
+      <td>conversion</td>
+      <td>0.20045</td>
+      <td>0.19300</td>
+      <td>-10.361264</td>
+      <td>11.665751</td>
+      <td>-10.255984</td>
+      <td>11.554384</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Original</td>
+      <td>gain</td>
+      <td>0.12850</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-34.256503</td>
+      <td>36.409115</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The comparison with the multi-options model shows a similar result.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<!--<h1 class="logo"><a href="../index.html">prayas</a></h1>-->
+<h1 class="logo">prayas</h1>
+
+
+
+
+
+
+
+
+<!--<h3>Navigation</h3>-->
+<ul>
+    <li class="toctree-l1"><a href="../index.html">Welcome</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-one-option-model.html">One option model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-multi-options-model.html">Multi-options model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Aggregated model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-one-vs-multi.html">One option vs. multi-options model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-experiments.html">Experiments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/index.html">Modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../examples.html">Examples</a><ul>
+      <li>Previous: <a href="02-multi-options-model.html" title="previous chapter">Multi-options model</a></li>
+      <li>Next: <a href="04-one-vs-multi.html" title="next chapter">One option vs. multi-options model</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019-2020 Avira Operations GmbH & Co. KG.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/notebooks/03-aggregated-model.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
